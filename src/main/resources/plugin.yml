@@ -1,0 +1,4 @@
+name: FactionsPlus
+main: org.cyberpwn.factionsplus.FactionsPlus
+version: ${project.version}
+depend: [Phantom, CurrencyShops, Factions, React, Vault, SilkSpawners]
