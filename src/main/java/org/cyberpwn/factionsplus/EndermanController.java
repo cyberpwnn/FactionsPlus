@@ -9,13 +9,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
-import org.cyberpwn.react.util.Cuboid;
 import org.phantomapi.construct.Controllable;
 import org.phantomapi.construct.Controller;
 import org.phantomapi.lang.GList;
 import org.phantomapi.sync.TaskLater;
 import org.phantomapi.util.C;
 import org.phantomapi.util.M;
+import org.phantomapi.world.Cuboid;
 import de.dustplanet.util.SilkUtil;
 
 public class EndermanController extends Controller
@@ -27,16 +27,21 @@ public class EndermanController extends Controller
 		super(parentController);
 	}
 	
-	@Override
-	public void onStart()
+	@EventHandler
+	public void on(EntityDamageEvent e)
 	{
-		u = SilkUtil.hookIntoSilkSpanwers();
-	}
-	
-	@Override
-	public void onStop()
-	{
+		try
+		{
+			if(e.getCause().equals(DamageCause.FALL) && e.getEntityType().equals(EntityType.ENDERMAN) && e.getDamage() >= 20.0)
+			{
+				((Enderman) e.getEntity()).setHealth(0);
+			}
+		}
 		
+		catch(Exception ex)
+		{
+			
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -67,20 +72,15 @@ public class EndermanController extends Controller
 		}
 	}
 	
-	@EventHandler
-	public void on(EntityDamageEvent e)
+	@Override
+	public void onStart()
 	{
-		try
-		{
-			if(e.getCause().equals(DamageCause.FALL) && e.getEntityType().equals(EntityType.ENDERMAN) && e.getDamage() >= 20.0)
-			{
-				((Enderman) e.getEntity()).setHealth(0);
-			}
-		}
+		u = SilkUtil.hookIntoSilkSpanwers();
+	}
+	
+	@Override
+	public void onStop()
+	{
 		
-		catch(Exception ex)
-		{
-			
-		}
 	}
 }

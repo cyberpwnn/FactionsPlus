@@ -96,7 +96,7 @@
 	</profiles>
 	<repositories>
 		<repository>
-			<id>releases</id>
+			<id>global</id>
 			<url>http://nexus.cyberpwn.org/content/groups/public/</url>
 		</repository>
 		<repository>
@@ -115,24 +115,15 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.cyberpwn</groupId>
-			<artifactId>React</artifactId>
-			<version>3.1</version>
-			<systemPath>${req.lib}\React.jar</systemPath>
-			<scope>system</scope>
+			<artifactId>factions</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.factions</groupId>
-			<artifactId>FactionsUUID_1.6.9.5-U0.1.19-RC2</artifactId>
-			<version>x</version>
-			<systemPath>${req.lib}\FactionsUUID_1.6.9.5-U0.1.19-RC2.jar</systemPath>
-			<scope>system</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.silkspawners</groupId>
+			<groupId>org.cyberpwn</groupId>
 			<artifactId>silkspawners</artifactId>
-			<version>x</version>
-			<systemPath>${req.lib}\SilkSpawners.jar</systemPath>
-			<scope>system</scope>
+			<version>1.0</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.cyberpwn</groupId>
