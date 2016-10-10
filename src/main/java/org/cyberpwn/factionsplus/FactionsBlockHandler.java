@@ -9,6 +9,11 @@ public class FactionsBlockHandler implements BlockHandler
 	@Override
 	public boolean canModify(Player p, Block block)
 	{
+		if(FA.getFaction(block.getLocation()).isWilderness())
+		{
+			return true;
+		}
+		
 		if(FA.getFaction(p).equals(FA.getFaction(block.getLocation())))
 		{
 			return true;
@@ -20,6 +25,11 @@ public class FactionsBlockHandler implements BlockHandler
 	@Override
 	public boolean hasProtection(Block block)
 	{
+		if(FA.getFaction(block.getLocation()).isWilderness())
+		{
+			return false;
+		}
+		
 		return FA.isClaimed(block.getChunk());
 	}
 
@@ -32,6 +42,11 @@ public class FactionsBlockHandler implements BlockHandler
 	@Override
 	public String getProtector(Block block)
 	{
+		if(FA.getFaction(block.getLocation()).isWilderness())
+		{
+			return null;
+		}
+		
 		return FA.getFaction(block.getChunk()).getTag();
 	}
 }
