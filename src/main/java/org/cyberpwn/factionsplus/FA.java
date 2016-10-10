@@ -20,6 +20,11 @@ public class FA
 		return !f.isWilderness() && !f.isSafeZone() && !f.isWarZone();
 	}
 	
+	public static boolean isWild(Faction f)
+	{
+		return f.isWilderness();
+	}
+	
 	public static boolean isClaimed(Location l)
 	{
 		return isClaimed(getFaction(l));
