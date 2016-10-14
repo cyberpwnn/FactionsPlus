@@ -7,12 +7,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.phantomapi.construct.Controllable;
 import org.phantomapi.construct.Controller;
-import de.dustplanet.util.SilkUtil;
 
 public class EndermanController extends Controller
 {
-	private SilkUtil u;
-	
 	public EndermanController(Controllable parentController)
 	{
 		super(parentController);
@@ -38,7 +35,7 @@ public class EndermanController extends Controller
 	@Override
 	public void onStart()
 	{
-		u = SilkUtil.hookIntoSilkSpanwers();
+		
 	}
 	
 	@Override
