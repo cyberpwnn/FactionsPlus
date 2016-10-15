@@ -36,6 +36,7 @@ import org.phantomapi.lang.GChunk;
 import org.phantomapi.lang.GList;
 import org.phantomapi.lang.GLocation;
 import org.phantomapi.lang.GMap;
+import org.phantomapi.nest.Nest;
 import org.phantomapi.statistics.Monitorable;
 import org.phantomapi.sync.S;
 import org.phantomapi.sync.Task;
@@ -229,6 +230,7 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 			
 			dispatchThread(next, new ProcessedChunk()
 			{
+				@Override
 				public void run()
 				{
 					Faction f = Board.getInstance().getFactionAt(new FLocation(next.toChunk().getBlock(0, 0, 0).getLocation()));
@@ -276,11 +278,11 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 	
 	public void displayTop(Player p, int tab)
 	{
-		if(tab <= (topulator.getTabCount() - 1) && tab > 0)
+		if(tab <= topulator.getTabCount() - 1 && tab > 0)
 		{
 			p.sendMessage(C.AQUA + "Top Factions " + C.BOLD + C.WHITE + "(" + tab + "/" + (topulator.getTabCount() - 1) + ")");
 			
-			int k = (1 + ((tab < 1 ? 1 : tab) * topulator.getTabSize())) - 10;
+			int k = 1 + (tab < 1 ? 1 : tab) * topulator.getTabSize() - 10;
 			
 			for(String i : topulator.getTab(tab - 1))
 			{
@@ -604,7 +606,7 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 					
 				}
 				
-				this.value = vv;
+				value = vv;
 			}
 		});
 		
@@ -630,7 +632,7 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 						
 						if(response.contains("result"))
 						{
-							this.value = response.getDouble("result");
+							value = response.getDouble("result");
 						}
 					}
 					
@@ -652,7 +654,7 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 						
 					}
 					
-					this.value = vv;
+					value = vv;
 				}
 			});
 			
@@ -671,7 +673,14 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 			{
 				Block bx = new Location(Bukkit.getWorld(b.getWorld().getName()), b.getX(), b.getY(), b.getZ()).getBlock();
 				MaterialBlock mb = new MaterialBlock(Material.MOB_SPAWNER, (byte) su.getSpawnerEntityID(bx));
-				this.value = getValue(mb);
+				double cx = 0;
+				
+				if(Nest.getBlock(bx).contains("t.s.v"))
+				{
+					cx = getValue(mb) * Nest.getBlock(bx).getDouble("t.s.v");
+				}
+				
+				value = getValue(mb) + cx;
 			}
 		});
 	}
