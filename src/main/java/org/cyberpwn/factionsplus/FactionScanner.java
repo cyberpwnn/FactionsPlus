@@ -675,9 +675,12 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 				MaterialBlock mb = new MaterialBlock(Material.MOB_SPAWNER, (byte) su.getSpawnerEntityID(bx));
 				double cx = 0;
 				
-				if(Nest.getBlock(bx).contains("t.s.v"))
+				if(Nest.getBlock(bx) != null)
 				{
-					cx = getValue(mb) * Nest.getBlock(bx).getDouble("t.s.v");
+					if(Nest.getBlock(bx).contains("t.s.v"))
+					{
+						cx = getValue(mb) * Nest.getBlock(bx).getDouble("t.s.v");
+					}
 				}
 				
 				value = getValue(mb) + cx;
