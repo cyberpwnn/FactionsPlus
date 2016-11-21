@@ -451,7 +451,7 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 					
 					if(mb.getMaterial().equals(Material.MOB_SPAWNER))
 					{
-						val = getSpawnerPrice(i.toLocation().getBlock());
+						val = getSpawnerPrice(i.toLocation());
 						spawners[0]++;
 						spawnerValue[0] += val;
 					}
@@ -664,13 +664,14 @@ public class FactionScanner extends ConfigurableController implements Monitorabl
 		return shopCache.get(mb.getMaterial() + ":" + mb.getData());
 	}
 	
-	public double getSpawnerPrice(Block b)
+	public double getSpawnerPrice(Location l)
 	{
 		return Phantom.sync(new RunVal<Double>()
 		{
 			@Override
 			public void run(Double d)
 			{
+				Block b = l.getBlock();
 				Block bx = new Location(Bukkit.getWorld(b.getWorld().getName()), b.getX(), b.getY(), b.getZ()).getBlock();
 				MaterialBlock mb = new MaterialBlock(Material.MOB_SPAWNER, (byte) su.getSpawnerEntityID(bx));
 				double cx = 0;
