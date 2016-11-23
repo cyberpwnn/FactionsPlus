@@ -132,7 +132,7 @@
 		<dependency>
 			<groupId>org.cyberpwn</groupId>
 			<artifactId>phantom</artifactId>
-			<version>K3</version>
+			<version>K4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.boydti</groupId>
